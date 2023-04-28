@@ -50,6 +50,16 @@ public class StreamsGroupingByExample {
             System.out.println(k + " Min " + v.getMin());
         });
 
+        //CollectingAndThen Example
+        Map<String, Long> countEmployee = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.collectingAndThen(Collectors.toList(), list -> {
+            long count = list.stream().count();
+            return count;
+        })));
+        countEmployee.forEach((k,v) -> {
+            System.out.println(k + " " + v);
+        });
+
+
     }
     public static List<Employee> getEmployeeList() {
         List<Employee> empList = new ArrayList<>();
