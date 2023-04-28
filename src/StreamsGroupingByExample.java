@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamsGroupingByExample {
@@ -37,9 +35,19 @@ public class StreamsGroupingByExample {
         });
 
         //Getting the Maximum or Minimum from Grouped Results
-        Map<String, Integer> salaryPerEmployee = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.summingInt(Employee::getSalaryAmount)));
-        salaryPerEmployee.forEach((k,v) -> {
-            System.out.println(k + " " + v);
+        Map<String, Optional<Employee>> maxSalaryPerEmployee = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.maxBy(Comparator.comparingInt(Employee::getSalaryAmount))));
+        maxSalaryPerEmployee.forEach((k,v) -> {
+            System.out.println(k + " " + v.get());
+        });
+
+        //Getting a Summary for an Attribute of Grouped Results
+        Map<String, IntSummaryStatistics> salaryStatisticsPerType = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.summarizingInt(Employee::getSalaryAmount)));
+        salaryStatisticsPerType.forEach((k,v) -> {
+            System.out.println(k + " Average " + v.getAverage());
+            System.out.println(k + " Count " + v.getCount());
+            System.out.println(k + " Max " + v.getMax());
+            System.out.println(k + " Sum " + v.getSum());
+            System.out.println(k + " Min " + v.getMin());
         });
 
     }
