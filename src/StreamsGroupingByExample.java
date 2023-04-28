@@ -1,12 +1,18 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class StreamsGroupingByExample {
     public static void main(String[] args) {
-
+        List<Employee> empList = getEmployeeList();
+        
     }
     public static List<Employee> getEmployeeList() {
-        
-        return null;
+        List<Employee> empList = new ArrayList<>();
+        empList.add(new Employee("Abhishek", 24, "HRA", 120000));
+        empList.add(new Employee("Abhishek", 24, "Allocation Bonus", 20000));
+        empList.add(new Employee("Rahul", 23, "HRA", 100000));
+        empList.add(new Employee("Rahul", 23, "Allocation Bonus", 12000));
+        return empList;
     }
 }
 
