@@ -24,8 +24,23 @@ public class StreamsGroupingByExample {
 //        Map<String, Map<BlogPostType, List<BlogPost>>> resultMap = posts.stream()
 //                .collect(Collectors.groupingBy(BlogPost::getAuthor, Collectors.groupingBy(BlogPost::getType)));
 
-        
+        //Getting the Average from Grouped Results
+        Map<String, Double> averageSalaryPerEmployee = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.averagingInt(Employee::getSalaryAmount)));
+        averageSalaryPerEmployee.forEach((k,v) -> {
+            System.out.println(k + " " + v);
+        });
 
+        //Getting the Sum from Grouped Results
+        Map<String, Integer> salaryPerEmployee = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.summingInt(Employee::getSalaryAmount)));
+        salaryPerEmployee.forEach((k,v) -> {
+            System.out.println(k + " " + v);
+        });
+
+        //Getting the Maximum or Minimum from Grouped Results
+        Map<String, Integer> salaryPerEmployee = empList.stream().collect(Collectors.groupingBy(Employee::getName, Collectors.summingInt(Employee::getSalaryAmount)));
+        salaryPerEmployee.forEach((k,v) -> {
+            System.out.println(k + " " + v);
+        });
 
     }
     public static List<Employee> getEmployeeList() {
