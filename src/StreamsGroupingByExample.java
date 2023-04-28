@@ -6,10 +6,27 @@ import java.util.stream.Collectors;
 public class StreamsGroupingByExample {
     public static void main(String[] args) {
         List<Employee> empList = getEmployeeList();
+        //GroupingBy employee name and storing it in a map
+        //Simple Grouping by a Single Column i.e. Employee name
         Map<String, List<Employee>> map = empList.stream().collect(Collectors.groupingBy(e -> e.getName()));
         map.forEach((k,v) -> {
             System.out.println(k + " " + v);
         });
+
+        //Grouping by Multiple Fields
+//        List<BlogPost> posts = new ArrayList<>();
+//        posts.add(new BlogPost("New Book 1", "Abhishek", BlogPostType.GUIDE, 24));
+//        posts.add(new BlogPost("New Book 2", "Abhishek", BlogPostType.GUIDE, 30));
+//        posts.add(new BlogPost("New Book 3", "Abhishek", BlogPostType.GUIDE, 22));
+//        posts.add(new BlogPost("New Book 1", "Rahul", BlogPostType.GUIDE, 46));
+//        posts.add(new BlogPost("New Book 1", "Rahul", BlogPostType.GUIDE, 11));
+//        posts.add(new BlogPost("New Book 1", "Rahul", BlogPostType.GUIDE, 22));
+//        Map<String, Map<BlogPostType, List<BlogPost>>> resultMap = posts.stream()
+//                .collect(Collectors.groupingBy(BlogPost::getAuthor, Collectors.groupingBy(BlogPost::getType)));
+
+        
+
+
     }
     public static List<Employee> getEmployeeList() {
         List<Employee> empList = new ArrayList<>();
@@ -66,4 +83,51 @@ class Employee {
     public void setSalaryAmount(int salaryAmount) {
         this.salaryAmount = salaryAmount;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", salaryDescription='" + salaryDescription + '\'' +
+                ", salaryAmount=" + salaryAmount +
+                '}';
+    }
+}
+
+
+class BlogPost {
+    String title;
+    String author;
+    BlogPostType type;
+    int likes;
+
+    public BlogPost(String title, String author, BlogPostType type, int likes) {
+        this.title = title;
+        this.author = author;
+        this.type = type;
+        this.likes = likes;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public BlogPostType getType() {
+        return type;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+}
+
+enum BlogPostType {
+    NEWS,
+    REVIEW,
+    GUIDE
 }
