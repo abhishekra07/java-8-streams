@@ -1,10 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamsGroupingByExample {
     public static void main(String[] args) {
         List<Employee> empList = getEmployeeList();
-        
+        Map<String, List<Employee>> map = empList.stream().collect(Collectors.groupingBy(e -> e.getName()));
+        map.forEach((k,v) -> {
+            System.out.println(k + " " + v);
+        });
     }
     public static List<Employee> getEmployeeList() {
         List<Employee> empList = new ArrayList<>();
