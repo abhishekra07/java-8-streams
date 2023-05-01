@@ -1,4 +1,5 @@
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class IntStreamExample {
@@ -29,12 +30,11 @@ public class IntStreamExample {
         iterate.forEach(num -> System.out.println(num));
 
         //Sum, Average, Count on IntStream
-//        List<Integer> list = Arrays.asList(5,3,4,1,2);
-        IntStream intStream = IntStream.of(5,3,4,1,2);
-        System.out.println("sum by using Stream : " + intStream.sum());
-        System.out .println("count by using Stream: " + intStream.count());
-        System.out.println("average by using Stream : " + intStream.average());
-
-        System.out.println("sort by using Stream: " + intStream.sorted().collect(Collectors.toList()));
+        List<Integer> list = Arrays.asList(5,3,4,1,2);
+//        IntStream intStream = IntStream.of(5,3,4,1,2); //java.lang.IllegalStateException as it will be closed after sum operation
+        System.out.println("sum by using Stream : " + list.stream().mapToInt(Integer::intValue).sum());
+        System.out .println("count by using Stream: " + list.stream().mapToInt(Integer::intValue).count());
+        System.out.println("average by using Stream : " + list.stream().mapToInt(Integer::intValue).average());
+        System.out.println("sum by using Stream and reduced: " + list.stream().mapToInt(Integer::intValue).reduce((num, sum) -> sum + num));
     }
 }
